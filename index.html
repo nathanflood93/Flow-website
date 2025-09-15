@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FLOW • Fitness • Lifestyle • Other Wellness</title>
+<style>
+:root{--bg:#f7faf9;--surface:#fff;--ink:#0f1e23;--muted:#3a5f55;--brand:#1557ff;--brand-dark:#0f43c9;--accent:#6aa8ff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:1200px;margin:0 auto;padding:0 18px}
+.header{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,#1557ff,#104fdc);color:#fff;border-bottom:1px solid rgba(255,255,255,.15)}
+.header .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900}
+.logo .mark{width:36px;height:36px;border-radius:8px;background:#fff;color:#1557ff;display:grid;place-items:center}
+.nav{display:flex;gap:16px}.nav a{color:#e9f0ff;font-weight:600}
+.btn,button{appearance:none;border:0;border-radius:10px;padding:12px 16px;font-weight:700;background:var(--brand);color:#fff;cursor:pointer}
+.btn.secondary{background:#e9f2ff;color:#1557ff}
+.hero{color:#fff;background:
+  radial-gradient(60% 90% at 70% 20%, #6aa8ff1a 0%, transparent 60%),
+  radial-gradient(70% 90% at 0% 90%, #1557ff14 0%, transparent 60%),
+  linear-gradient(180deg,#2a6bff,#104fdc)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:60px 0}
+.hero h1{margin:0 0 10px 0;font-size:42px;line-height:1.05}
+.card{background:var(--surface);border:1px solid #e6edf0;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.section{padding:44px 0}.kicker{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#2d4bbd;font-size:12px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(4,1fr)}
+.product-card{display:flex;flex-direction:column;overflow:hidden}
+.product-card .thumb{height:180px;display:grid;place-items:center;background:linear-gradient(135deg,#eef4ff,#dfe9ff)}
+.product-card .body{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.price{font-weight:800}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid #d6e2ff;background:#eef4ff;color:#1557ff;font-size:12px;margin-right:6px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid #e6edf0;text-align:left}
+.notice{background:#fff4e8;border:1px solid #ffd7b3;border-radius:12px;padding:12px}
+.mini{font-size:12px;color:#4a6a74}
+.footer{margin-top:40px;background:#1557ff;color:#e9f0ff}
+.footer a{color:#e9f0ff}.footer .inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:22px;padding:26px 0}
+.cart-pill{background:#e9f2ff;color:#1557ff;padding:6px 10px;border-radius:999px;border:1px solid #d6e2ff;font-weight:800}
+.menu-toggle{display:none}.mobile-nav{display:none}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.hero .wrap{grid-template-columns:1fr}}
+@media (max-width:820px){
+  .nav{display:none}
+  .menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;border:2px solid #e9f2ff;background:transparent;color:#e9f2ff;font-weight:900}
+  .mobile-nav{position:fixed;inset:0;display:none;background:rgba(0,0,0,.5);z-index:30}
+  .mobile-nav.open{display:block}
+  .mobile-nav .sheet{position:absolute;right:0;top:0;bottom:0;width:78%;background:#1557ff;color:#e9f0ff;padding:18px}
+  .mobile-nav a{display:block;color:#e9f0ff;padding:10px 6px;border-radius:8px}
+  .mobile-nav .close{background:transparent;border:2px solid #e9f2ff;color:#e9f2ff;border-radius:10px;padding:8px 10px;margin-left:auto}
+}
+.sticky-cta{display:none}@media (max-width:820px){.sticky-cta{position:sticky;bottom:0;background:#fff;border-top:1px solid #e6edf0;padding:10px;display:flex;gap:10px;z-index:25}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container inner">
+    <button class="menu-toggle" onclick="toggleMenu(true)">≡</button>
+    <div class="logo"><div class="mark">F</div><div>FLOW</div></div>
+    <nav class="nav">
+      <a href="#home" onclick="route('home')">Home</a>
+      <a href="#shop" onclick="route('shop')">Shop</a>
+      <a href="#cart" onclick="route('cart')">Cart</a>
+    </nav>
+    <a href="#cart" id="cart-pill" class="cart-pill" onclick="route('cart')">Cart</a>
+  </div>
+  <div class="mobile-nav" onclick="toggleMenu(false)">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <button class="close" onclick="toggleMenu(false)">Close ✕</button>
+      <a href="#home" onclick="toggleMenu(false);route('home')">Home</a>
+      <a href="#shop" onclick="toggleMenu(false);route('shop')">Shop</a>
+      <a href="#cart" onclick="toggleMenu(false);route('cart')">Cart</a>
+    </div>
+  </div>
+</header>
+
+<!-- HOME -->
+<section class="hero" data-view="home">
+  <div class="container wrap">
+    <div>
+      <h1>Become Your Best. <br/>Feel Your Best.</h1>
+      <p>FLOW delivers premium, research-grade peptides and wellness supplies to support your fitness, recovery, cognition, and overall vitality.</p>
+      <div style="display:flex;gap:10px">
+        <a class="btn" href="#shop" onclick="route('shop')">Shop Now</a>
+        <a class="btn secondary" href="#home">What is FLOW?</a>
+      </div>
+    </div>
+    <div class="card" style="padding:20px">
+      <div class="kicker">Why FLOW</div>
+      <h3 style="margin:6px 0 8px">Simple. Trustworthy. Results-focused.</h3>
+      <ul>
+        <li>Clean, easy shopping experience</li>
+        <li>Secure checkout (Card or Bank Transfer)</li>
+        <li>Guest checkout — no account required</li>
+        <li>Transparent details and clear policies</li>
+      </ul>
+      <div class="notice" style="margin-top:10px">Disclaimer: For research and educational purposes only. Not for medical use.</div>
+    </div>
+  </div>
+  <section class="section container">
+    <div class="kicker">Featured</div>
+    <h2>Popular Products</h2>
+    <div id="featured" class="grid"></div>
+  </section>
+</section>
+
+<!-- SHOP -->
+<section class="section container" data-view="shop" style="display:none">
+  <div class="kicker">Shop</div><h2>All Products</h2>
+  <div id="shop-grid" class="grid"></div>
+</section>
+
+<!-- PRODUCT -->
+<section class="section container" data-view="product" style="display:none">
+  <div class="card" style="padding:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="card" style="height:320px;display:grid;place-items:center">
+        <img id="p-img" alt="Product image" style="max-width:100%;max-height:280px"/>
+      </div>
+      <div>
+        <div class="kicker">Research Compound</div>
+        <h2 id="p-name">—</h2>
+        <div class="price" id="p-price">$0.00</div>
+        <div style="margin:12px 0">
+          <button id="add-btn">Add to Cart</button>
+          <a class="btn secondary" href="#cart" onclick="route('cart')">Go to Cart</a>
+        </div>
+        <div class="mini">For research and educational purposes only. Not for human use.</div>
+        <hr style="margin:16px 0"/>
+        <h3>Description</h3>
+        <p id="p-desc">—</p>
+      </div>
+    </div>
+  </div>
+  <section class="sticky-cta container">
+    <button id="add-btn">Add to Cart</button>
+    <a class="btn secondary" href="#cart" onclick="route('cart')">Go to Cart</a>
+  </section>
+</section>
+
+<!-- CART -->
+<section class="section container" data-view="cart" style="display:none">
+  <div class="kicker">Your order</div><h2>Shopping Cart</h2>
+  <div id="cart-empty" class="notice">Your cart is empty.</div>
+  <table id="cart-table" class="table" style="display:none">
+    <thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th><th></th></tr></thead>
+    <tbody id="cart-body"></tbody>
+    <tfoot><tr><th colspan="3" style="text-align:right">Total</th><th id="cart-total">$0.00</th><th></th></tr></tfoot>
+  </table>
+  <div id="checkout-cta" style="display:none;justify-content:flex-end;margin-top:14px">
+    <a class="btn" href="#checkout" onclick="route('checkout')">Checkout</a>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section class="section container" data-view="checkout" style="display:none">
+  <div class="kicker">Secure Checkout</div><h2>Billing & Payment</h2>
+  <div class="card" style="padding:16px">
+    <label>Email</label><input class="mini" id="email" placeholder="you@example.com" style="width:100%;padding:12px;border:1px solid #d9e7e2;border-radius:10px"/>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
+      <div><label>Name</label><input class="mini" id="name" placeholder="Full name" style="width:100%;padding:12px;border:1px solid #d9e7e2;border-radius:10px"/></div>
+      <div><label>Address</label><input class="mini" id="address" placeholder="Shipping address" style="width:100%;padding:12px;border:1px solid #d9e7e2;border-radius:10px"/></div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="kicker">Payment Method</div>
+      <label><input type="radio" name="pay" value="card" checked/> Credit / Debit Card</label>
+      <label style="margin-left:10px"><input type="radio" name="pay" value="bank"/> Direct Bank Transfer</label>
+      <div class="mini" style="margin-top:6px">Demo only — no real payment is processed.</div>
+    </div>
+    <div style="margin-top:14px"><button onclick="saveCheckout()">Place Order</button></div>
+  </div>
+</section>
+
+<!-- THANKS -->
+<section class="section container" id="thanks" data-view="thanks" style="display:none"></section>
+
+<footer class="footer">
+  <div class="container inner">
+    <div>
+      <h4>About FLOW</h4>
+      <p>Fitness • Lifestyle • Other Wellness. Premium peptides and wellness supplies designed to help you feel and perform at your best.</p>
+    </div>
+    <div><h4>Shop</h4><a href="#shop" onclick="route('shop')">All Products</a></div>
+    <div><h4>Company</h4><span class="mini">Contact • FAQ • Policies</span></div>
+    <div><h4>Legal</h4><span class="mini">Privacy • Terms • Refund</span></div>
+  </div>
+  <div class="container" style="padding:10px 0 20px;border-top:1px solid #0a6c56">
+    <span class="mini">© 2025 FLOW Wellness. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(open){document.querySelector('.mobile-nav').classList[open?'add':'remove']('open')}
+
+/* inline SVG vial (data URI) generator (pre-built) */
+const vial = (label)=>`data:image/svg+xml;utf8,`+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><defs><linearGradient id='g' x1='0' x2='0' y1='0' y2='1'><stop offset='0%' stop-color='#eef4ff'/><stop offset='100%' stop-color='#dfe9ff'/></linearGradient></defs><rect width='100%' height='100%' fill='url(#g)'/><g transform='translate(120,40)'><rect x='0' y='0' width='160' height='200' rx='10' ry='10' fill='#ffffff' stroke='#b8c7ff' stroke-width='4'/><rect x='0' y='-25' width='160' height='40' rx='8' ry='8' fill='#1557ff' opacity='0.9'/><rect x='25' y='130' width='110' height='40' rx='6' ry='6' fill='#edf2ff' stroke='#c8d4ff'/></g><text x='200' y='270' text-anchor='middle' font-family='Arial' font-size='22' fill='#0f43c9'>${label}</text></svg>`);
+
+/* products */
+const PRODUCTS=[
+ {id:'retatrutide',name:'Retatrutide (10mg)',price:199.99,tags:['Metabolic'],img:vial('Retatrutide'),desc:'Multi-agonist research peptide that engages GLP-1, GIP and glucagon receptors; commonly investigated for effects on energy balance and glycemic control in controlled models.'},
+ {id:'bpc157',name:'BPC-157 (5mg)',price:59.99,tags:['Recovery'],img:vial('BPC-157'),desc:'Pentadecapeptide analogue explored for connective-tissue signaling and gastric mucosa integrity in lab settings.'},
+ {id:'tb500',name:'TB-500 (5mg)',price:69.99,tags:['Recovery'],img:vial('TB-500'),desc:'Thymosin-β4 fragment studied for roles in cell migration, angiogenesis, and inflammation modulation.'},
+ {id:'bpc_tb_blend',name:'BPC-157 + TB-500 Blend (10mg)',price:119.99,tags:['Recovery'],img:vial('BPC+TB500'),desc:'Synergistic blend combining BPC-157 and TB-500 for multifactorial study designs related to soft-tissue recovery.'},
+ {id:'melanotan',name:'Melanotan II (10mg)',price:39.99,tags:['Pigmentation'],img:vial('Melanotan II'),desc:'Synthetic analogue of α-MSH investigated for melanogenesis pathways and photobiology research.'},
+ {id:'igf1',name:'IGF-1 LR3 (1mg)',price:149.99,tags:['Performance'],img:vial('IGF-1 LR3'),desc:'Long-acting insulin-like growth factor analogue used in vitro to study anabolic signaling and hypertrophy pathways.'},
+ {id:'motsc',name:'MOTS-c (10mg)',price:129.99,tags:['Metabolic'],img:vial('MOTS-c'),desc:'Mitochondrial-derived peptide examined for metabolic regulation, AMPK-linked exercise-mimetic signaling, and stress responses.'},
+ {id:'semax',name:'Semax (10mg)',price:79.99,tags:['Cognitive'],img:vial('Semax'),desc:'Heptapeptide researched for neurotrophic/neuroprotective effects, including modulation of BDNF expression.'},
+ {id:'ghkcu',name:'GHK-Cu (10mg)',price:59.99,tags:['Skin'],img:vial('GHK-Cu'),desc:'Copper-binding tripeptide investigated for collagen support, dermal remodeling and wound-healing biology.'},
+ {id:'bacwater',name:'Bacteriostatic Water (30ml)',price:9.99,tags:['Lab Supply'],img:vial('BAC Water'),desc:'Sterile water with 0.9% benzyl alcohol for laboratory reconstitution of lyophilized materials.'}
+];
+const money=v=>'$'+v.toFixed(2);
+const getCart=()=>{try{return JSON.parse(localStorage.getItem('flow_cart')||'[]')}catch(e){return[]}};
+const setCart=c=>{localStorage.setItem('flow_cart',JSON.stringify(c));renderCartPill()};
+function addToCart(id){const c=getCart();const it=c.find(i=>i.id===id);it?it.qty++:c.push({id,qty:1});setCart(c);alert('Added to cart');}
+function changeQty(id,d){const c=getCart();const it=c.find(i=>i.id===id);if(!it)return;it.qty=Math.max(1,it.qty+d);setCart(c);renderCart();}
+function removeFromCart(id){setCart(getCart().filter(i=>i.id!==id));renderCart();}
+function renderCartPill(){const pill=document.getElementById('cart-pill');if(!pill)return;const n=getCart().reduce((a,b)=>a+b.qty,0);pill.textContent=n?`Cart • ${n}`:'Cart';}
+
+/* views */
+const el=(sel)=>document.querySelector(sel);
+function productCard(p){const tags=(p.tags||[]).map(t=>`<span class="badge">${t}</span>`).join('');return `<div class="product-card card">
+  <div class="thumb"><img src="${p.img}" alt="${p.name}"/></div>
+  <div class="body"><div>${tags}</div><div style="font-weight:800">${p.name}</div><div class="price">${money(p.price)}</div>
+  <div style="display:flex;gap:8px;margin-top:6px"><button onclick="addToCart('${p.id}')">Add to Cart</button>
+  <a class="btn secondary" href="#product" onclick="viewProduct('${p.id}')">Details</a></div></div></div>`}
+function renderFeatured(){const t=el('#featured');if(t)t.innerHTML=PRODUCTS.slice(0,8).map(productCard).join('')}
+function renderShop(){const t=el('#shop-grid');if(t)t.innerHTML=PRODUCTS.map(productCard).join('')}
+function viewProduct(id){const p=PRODUCTS.find(x=>x.id===id)||PRODUCTS[0];show('product');el('#p-name').textContent=p.name;el('#p-price').textContent=money(p.price);el('#p-desc').textContent=p.desc+' This product is provided for research and educational purposes only.';el('#p-img').src=p.img;document.querySelectorAll('#add-btn').forEach(b=>b.onclick=()=>addToCart(p.id))}
+function renderCart(){const body=el('#cart-body');if(!body)return;const c=getCart();if(!c.length){el('#cart-empty').style.display='block';el('#cart-table').style.display='none';el('#checkout-cta').style.display='none';return}
+el('#cart-empty').style.display='none';el('#cart-table').style.display='table';el('#checkout-cta').style.display='flex';
+body.innerHTML=c.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);const sub=p.price*it.qty;return `<tr><td>${p.name}</td><td>
+<div style="display:flex;gap:8px;align-items:center"><button class="btn secondary" onclick="changeQty('${it.id}',-1)">-</button>${it.qty}<button class="btn secondary" onclick="changeQty('${it.id}',1)">+</button></div>
+</td><td>${money(p.price)}</td><td>${money(sub)}</td><td><a href="#" onclick="removeFromCart('${it.id}')">Remove</a></td></tr>`}).join('');
+const total=c.reduce((a,b)=>{const p=PRODUCTS.find(x=>x.id===b.id);return a+p.price*b.qty},0);el('#cart-total').textContent=money(total)}
+function saveCheckout(){const method=document.querySelector('input[name=pay]:checked')?.value||'card';const email=el('#email')?.value||'';const name=el('#name')?.value||'';const address=el('#address')?.value||'';localStorage.setItem('flow_checkout',JSON.stringify({method,email,name,address}));show('thanks');renderThanks()}
+function renderThanks(){const d=JSON.parse(localStorage.getItem('flow_checkout')||'{}');const t=el('#thanks');if(!t)return;t.innerHTML=`<div class="card" style="padding:20px"><h2>Thank you${d.name?`, ${d.name}`:''}!</h2>
+<p>We recorded your order. ${d.method==='bank'?'Please complete a <b>bank transfer</b> using the details below and include your email as reference.':'Payment will be processed securely.'}</p>
+${d.method==='bank'?'<div class="notice"><b>Bank Transfer</b><br>Account: FLOW Wellness Pty Ltd<br>BSB: 062-000<br>Account #: 12345678<br>Reference: your email</div>':''}
+<p class="mini">Demo only — no real payment was processed.</p></div>`;localStorage.removeItem('flow_cart');renderCartPill()}
+
+/* router */
+function show(view){document.querySelectorAll('[data-view]').forEach(s=>s.style.display='none');const v=document.querySelector(`[data-view="${view}"]`);if(v)v.style.display='block'}
+function route(name){location.hash='#'+name}
+function router(){const h=(location.hash||'#home').slice(1);show(h);if(h==='home')renderFeatured();if(h==='shop')renderShop();if(h==='cart')renderCart();if(h==='thanks')renderThanks()}
+window.addEventListener('hashchange',router);document.addEventListener('DOMContentLoaded',()=>{router();renderCartPill()});
+</script>
+</body>
+</html>
